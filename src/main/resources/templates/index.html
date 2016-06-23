@@ -6,29 +6,63 @@
   <title>Parallax Template - Materialize</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="/webjars/materialize/0.97.6/dist/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  
 </head>
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <a id="logo-container" href="#modalLogin" class="brand-logo modal-trigger"><i class="material-icons right">perm_identity</i>Login</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a href="#"><i class="material-icons left">input</i>Send Deck</a></li>
+        <li><a href="#"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="#"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a href="#"><i class="material-icons left">input</i>Send Deck</a></li>
+        <li><a href="#"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="#"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+  
+  <!-- Modal Structure -->
+  <div id="modalLogin" class="modal">
+    <div class="modal-content">
+      <h4 align="center">Login</h4>
+      	<form class="loginForm">
+			       <ul class="list">
+			        <li><div class="input-field col s6">
+			          <i class="material-icons prefix">account_circle</i>
+			          <input id="icon_prefix" type="text" class="validate"/>
+			          <label for="icon_prefix">User</label>
+			        </div></li>
+			        <li><div class="input-field col s6">
+			          <i class="material-icons prefix">https</i>
+			          <input id="icon_telephone" type="password" class="validate"/>
+			          <label for="icon_telephone">Password</label>
+			        </div></li>
+			        </ul>
+			        <button class="btn waves-effect waves-light" type="submit" id="btSubmitForm"
+									onclick="document.getElementById('loginForm').submit(); return false;">Login
+    				<i class="material-icons left">send</i>
+	  		</button>  					
+		</form>
+    </div>
+  </div>
+  <!-- End of Modal Structure -->
 
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
-        <br><br>
+        <br></br>
         <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
         <div class="row center">
           <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
@@ -36,11 +70,10 @@
         <div class="row center">
           <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
         </div>
-        <br><br>
-
+        <br></br>
       </div>
     </div>
-    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="/img/background1.jpg" alt="Unsplashed background img 1"/></div>
   </div>
 
 
@@ -89,7 +122,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+    <div class="parallax"><img src="/img/background2.jpg" alt="Unsplashed background img 2"/></div>
   </div>
 
   <div class="container">
@@ -99,7 +132,30 @@
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Contact Us</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+           <div class="row">
+			    <form class="contactForm">
+			      <div class="row">
+			        <div class="input-field col s6">
+			          <i class="material-icons prefix">account_circle</i>
+			          <input id="icon_prefix" type="text" class="validate"/>
+			          <label for="icon_prefix">Full Name</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <i class="material-icons prefix">contacts</i>
+			          <input id="icon_telephone" type="tel" class="validate"/>
+			          <label for="icon_telephone">Email</label>
+			        </div>
+			        <div class="input-field col s12">
+			          <textarea id="textarea1" class="materialize-textarea"></textarea>
+			          <label for="textarea1">Textarea</label>
+			        </div>
+			      </div>
+			      <button class="btn waves-effect waves-light" type="submit" id="btSubmitForm"
+									onclick="document.getElementById('contactForm').submit(); return false;">Submit
+    				<i class="material-icons right">send</i>
+  				  </button>
+			    </form>
+ 			 </div>
         </div>
       </div>
 
@@ -115,7 +171,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="/img/background3.jpg" alt="Unsplashed background img 3"/></div>
   </div>
 
   <footer class="page-footer teal">

@@ -52,6 +52,11 @@ p {
   font-size: inherit;
 }
 
+.modal .modal-content {
+  padding: 24px;
+  overflow: hidden;
+}
+
 footer.page-footer {
   margin: 0;
 }

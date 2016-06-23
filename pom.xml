@@ -59,6 +59,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- CSS -->
+		<dependency>
+    		<groupId>org.webjars.bower</groupId>
+    		<artifactId>materialize</artifactId>
+    	<version>0.97.6</version>
+</dependency>
 	</dependencies>
 	
 	<build>
