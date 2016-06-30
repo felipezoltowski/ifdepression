@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -15,49 +17,25 @@
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#modalLogin" class="brand-logo modal-trigger"><i class="material-icons right">perm_identity</i>Login</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="submitdeck"><i class="material-icons left">input</i>Send Your Deck</a></li>
+      <a id="logo-container" href="/home" class="brand-logo modal-trigger">Login</a>
+      <ul class="right hide-on-med-and-down" sec:authorize="!isAnonymous()">
+        <li><a href="#submitdeck"><i class="material-icons left">input</i>Send Your Deck</a></li>
         <li><a href="#"><i class="material-icons left">dashboard</i>View Decks</a></li>
-        <li><a href="contactus"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
         <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
+        <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="submitdeck"><i class="material-icons left">input</i>Send Your Deck</a></li>
+        <li><a href="#submitdeck"><i class="material-icons left">input</i>Send Your Deck</a></li>
         <li><a href="#"><i class="material-icons left">dashboard</i>View Decks</a></li>
-        <li><a href="contactus"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
         <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
+        <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-  
-  <!-- Modal Structure -->
-  <div id="modalLogin" class="modal">
-    <div class="modal-content">
-      <h4 align="center">Login</h4>
-      	<form class="loginForm">
-			       <ul class="list">
-			        <li><div class="input-field col s6">
-			          <i class="material-icons prefix">account_circle</i>
-			          <input id="icon_prefix" type="text" class="validate"/>
-			          <label for="icon_prefix">User</label>
-			        </div></li>
-			        <li><div class="input-field col s6">
-			          <i class="material-icons prefix">https</i>
-			          <input id="icon_telephone" type="password" class="validate"/>
-			          <label for="icon_telephone">Password</label>
-			        </div></li>
-			        </ul>
-			        <button class="btn waves-effect waves-light" type="submit" id="btSubmitForm"
-									onclick="document.getElementById('loginForm').submit(); return false;">Login
-    				<i class="material-icons left">send</i>
-	  		</button>  					
-		</form>
-    </div>
-  </div>
-  <!-- End of Modal Structure -->
 
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
@@ -114,7 +92,7 @@
   </div>
   
   <!-- Submit your deck -->
-  <div id="submitdeck" class="container">
+  <div id="submitdeck" class="container" >
     <div class="section">
       <div class="row">
         <div class="col s12 center">
@@ -289,9 +267,9 @@
 
 
   <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-
+  
   </body>
 </html>
