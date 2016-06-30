@@ -17,16 +17,16 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#modalLogin" class="brand-logo modal-trigger"><i class="material-icons right">perm_identity</i>Login</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#"><i class="material-icons left">input</i>Send Deck</a></li>
+        <li><a href="submitdeck"><i class="material-icons left">input</i>Send Your Deck</a></li>
         <li><a href="#"><i class="material-icons left">dashboard</i>View Decks</a></li>
-        <li><a href="#"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="contactus"><i class="material-icons left">message</i>Contact Us</a></li>
         <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#"><i class="material-icons left">input</i>Send Deck</a></li>
+        <li><a href="submitdeck"><i class="material-icons left">input</i>Send Your Deck</a></li>
         <li><a href="#"><i class="material-icons left">dashboard</i>View Decks</a></li>
-        <li><a href="#"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="contactus"><i class="material-icons left">message</i>Contact Us</a></li>
         <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -112,22 +112,100 @@
 
     </div>
   </div>
-
-
+  
+  <!-- Submit your deck -->
+  <div id="submitdeck" class="container">
+    <div class="section">
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>Submit your deck</h4>
+           <div class="row">
+			    <form class="deckForm">
+			      <div class="row">
+			        <div class="input-field col s6">
+			          <i class="material-icons prefix">account_circle</i>
+			          <input id="icon_prefix" type="text" class="validate"/>
+			          <label for="icon_prefix">NickName</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <i class="material-icons prefix">turned_in_not</i>
+			          <input id="icon_prefix" type="text" class="validate"/>
+			          <label for="icon_prefix">Clan Name</label>
+			        </div>
+			        
+			        <div class="input-field col s12">
+					    <select>
+					      <option value="" disabled="" selected="">Choose your option</option> -->
+					      <option value="1">Level 1</option>
+					      <option value="2">Level 2</option>
+					      <option value="3">Level 3</option>
+					      <option value="4">Level 4</option>
+					      <option value="5">Level 5</option>
+					      <option value="6">Level 6</option>
+					      <option value="7">Level 7</option>
+					      <option value="8">Level 8</option>
+					      <option value="9">Level 9</option>
+					      <option value="10">Level >9</option>
+					    </select>
+					    <label>King Tower Level</label>
+					 </div>
+					 
+					 <div class="input-field col s12">
+					    <select>
+					      <option value="" disabled="" selected="">Choose your option</option>
+					      <option value="1">Arena 1</option>
+					      <option value="2">Arena 2</option>
+					      <option value="3">Arena 3</option>
+					      <option value="4">Arena 4</option>
+					      <option value="5">Arena 5</option>
+					      <option value="6">Arena 6</option>
+					      <option value="7">Arena 7</option>
+					      <option value="8">Arena 8</option>
+					    </select>
+					    <label>Arena</label>
+					 </div>
+			        <div class="input-field col s6">
+			          <i class="material-icons prefix">contacts</i>
+			          <input id="icon_telephone" type="tel" class="validate"/>
+			          <label for="icon_telephone">Email<span class="frm_required">*</span></label>
+			        </div>
+			        <div class="input-field col s6">
+			          <i class="material-icons prefix">grade</i>
+			          <input id="icon_telephone" type="tel" class="validate"/>
+			          <label for="icon_telephone">Deck Name<span class="frm_required">*</span></label>
+			        </div>
+			        <div class="input-field col s12">
+			          <textarea id="textarea1" class="materialize-textarea"></textarea>
+			          <label for="textarea1">Your guide here<span class="frm_required">*</span></label>
+			        </div>
+			      </div>
+			      <button class="btn waves-effect waves-light" type="submit" id="btSubmitForm"
+									onclick="document.getElementById('deckForm').submit(); return false;">Submit
+    				<i class="material-icons right">send</i>
+  				  </button>
+			    </form>
+ 			</div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- Submit your deck end -->
+ 
   <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+          <h5 class="header col s12 light">You can contact us about any doubt, suggestion, critics and support right below</h5>
         </div>
       </div>
     </div>
     <div class="parallax"><img src="/img/background2.jpg" alt="Unsplashed background img 2"/></div>
   </div>
 
-  <div class="container">
+<!-- Contact us -->
+  <div id="contactus" class="container">
     <div class="section">
-
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
@@ -155,13 +233,12 @@
     				<i class="material-icons right">send</i>
   				  </button>
 			    </form>
- 			 </div>
+ 			</div>
         </div>
       </div>
-
     </div>
   </div>
-
+<!-- Contact us end -->
 
   <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
