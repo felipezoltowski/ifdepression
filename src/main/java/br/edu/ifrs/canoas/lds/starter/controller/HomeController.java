@@ -10,17 +10,13 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String index(Model model){
-		
 		model.addAttribute("auth",SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		
 		return "/login";
 	}
 	
 	@RequestMapping("/home")
 	public String home(Model model){
-		
 		model.addAttribute("auth",SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		
 		return "/index";
 	}
 }
