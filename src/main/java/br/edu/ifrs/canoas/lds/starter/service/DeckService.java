@@ -1,5 +1,7 @@
 package br.edu.ifrs.canoas.lds.starter.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +63,13 @@ public class DeckService {
 	 */
 	public void delete(Long id) {
 		deckRepository.delete(id);
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Iterable<Deck> listApprovedDecks() {
+		return deckRepository.findByStatus(true);
 	}
 
 }

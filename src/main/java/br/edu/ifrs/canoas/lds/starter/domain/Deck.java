@@ -1,16 +1,16 @@
 package br.edu.ifrs.canoas.lds.starter.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Deck {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -21,11 +21,11 @@ public class Deck {
 	@NotEmpty
 	private String clanname;
 	
-	@NotEmpty
-	private Integer kingtowerlevel;
+	@NotNull
+	private int kingtowerlevel;
 	
-	@NotEmpty
-	private Integer arena;
+	@NotNull
+	private int arena;
 	
 	@NotEmpty
 	private String email;
@@ -37,10 +37,9 @@ public class Deck {
 	@Size(min = 1, max = 500)
 	private String guide;
 	
-	@Enumerated(EnumType.STRING)
-	private Status status;
+	private boolean status;
 	
-	private String statusName;
+	private String deletion;
 
 	public Long getId() {
 		return id;
@@ -106,20 +105,19 @@ public class Deck {
 		this.guide = guide;
 	}
 
-	public Status getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
-	public String getStatusName() {
-		return statusName;
+	public String getDeletion() {
+		return deletion;
 	}
 
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
+	public void setDeletion(String deletion) {
+		this.deletion = deletion;
 	}
-	
 }

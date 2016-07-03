@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -94,14 +95,49 @@ public class DeckController {
 	public String save(@Valid Deck deck, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs,
 			Locale locale) {
 		if (!bindingResult.hasErrors()) {
+			deck.setStatus(false);
+			deck.setDeletion(null);
 			Deck savedDeck = deckService.save(deck);
 			model.addAttribute("readonly", true);
-
 			redirectAttrs.addFlashAttribute("message", messageSource.getMessage("deck.saved", null, locale));
-
 			return "redirect:/deck/view/" + savedDeck.getId() + "?success";
 		}
 		model.addAttribute("readonly", false);
 		return "/deck/form";
+	}
+
+	/**
+	 * 
+	 * Evaluate Method 
+	 * 
+	 */
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/evaluate",  method = RequestMethod.POST)
+	public String evaluate(Deck deck, Model model, RedirectAttributes redirectAttrs,
+			Locale locale) {
+				
+		if (deck.getDeletion().equalsIgnoreCase("reject")) {
+			deck.setStatus(false);
+		} else {
+			deck.setStatus(true);
+		}
+		
+		try {
+			//save the changes
+            Deck savedDeck = deckService.save(deck);
+            model.addAttribute("readonly", true);
+			
+			redirectAttrs.addFlashAttribute("message", 
+					MessageFormat.format(messageSource.getMessage("deck.evaluation.success", null, locale), null));
+
+	        return "redirect:/deck/view/" + savedDeck.getId() + "?success";
+				
+			} catch (Exception e) {
+				redirectAttrs.addFlashAttribute("message5",
+						MessageFormat.format(messageSource.getMessage("deck.evaluation.failed", null, locale), null));	
+				model.addAttribute("readonly", false);
+				return "/deck/form";
+			}
+		
 	}
 }

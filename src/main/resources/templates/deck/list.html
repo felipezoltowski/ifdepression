@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">	
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Clash Decks</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="/webjars/materialize/0.97.6/dist/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+</head>
+<body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
+      <ul class="right hide-on-med-and-down" sec:authorize="!isAnonymous()">
+        <li><a href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
+        <li><a href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
+        <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav" sec:authorize="!isAnonymous()">
+        <li><a href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
+        <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+   <!-- Submit your deck -->
+  <div id="submitdeck" class="container" >
+    <div class="section">
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>Deck List</h4>
+           <div class="row">
+			    <table class="highlight">
+        <thead>
+          <tr>
+              <th th:text="#{deck.deckname}"></th>
+              <th th:text="#{deck.author}"></th>
+              <th th:text="#{deck.arena}"></th>
+              <th th:text="#{deck.kingtowerlevel}"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          	<tr th:each="deck : ${decks}">
+        	    <td>
+        	    <a href="#" th:href="@{|/deck/view/${deck.id}|}"
+					th:text="|${deck.deckname}|" /></td>
+				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
+					th:text="|${deck.nickname}|" /></td>
+
+				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
+					th:text="|${deck.arena}|" /></td>
+
+				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
+					th:text="|${deck.kingtowerlevel}|" /></td>
+  			</tr>
+        </tbody>
+      </table>
+ 			</div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <footer id="aboutus" class="page-footer blue darken-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">
+          I am a independent student that made this as a project for my college course. 
+          As a independent developer, i decided to make this to help people with difficult at the game
+          </p>  
+        </div>
+       <!--  <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+  
+  </body>
+</html>
