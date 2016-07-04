@@ -14,6 +14,8 @@
   
 </head>
 <body>
+<header></header>
+  <main>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
@@ -56,15 +58,7 @@
 			      <div class="row">
 			      
 			      <input type="hidden" th:field="*{id}" />
-			           
-			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
-			          <i class="material-icons prefix">account_circle</i>
-			          <input id="NickName" type="text" class="validate"
-			          th:field="*{nickname}" th:readonly="${readonly}"/> <span th:if="${#fields.hasErrors('nickname')}"
-			          th:errors="*{nickname}" th:class="help-block"/>
-			          <label for="NickName" th:text="#{deck.nickname}"></label>
-			        </div>
-			        
+			           		        
 			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('clanname')}? 'has-error'">
 			          <i class="material-icons prefix">turned_in_not</i>
 			          <input id="ClanName" type="text" class="validate"
@@ -105,13 +99,6 @@
 					    </select>
 					    <label th:text="#{deck.arena}"></label>
 					 </div>
-			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-			          <i class="material-icons prefix">contacts</i>
-			          <input id="Email" type="text" class="validate"
-			          th:field="*{email}" th:readonly="${readonly}"/> <span th:if="${#fields.hasErrors('email')}"
-			          th:errors="*{email}" th:class="help-block"/>
-			          <label for="Email" th:text="#{deck.email}"><span class="frm_required">*</span></label>
-			        </div>
 			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('deckname')}? 'has-error'" >
 			          <i class="material-icons prefix">grade</i>
 			          <input id="Deck Name" type="text" class="validate"
@@ -146,7 +133,7 @@
 			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('nickname')}? 'has-error'">
 			          <i class="material-icons prefix">account_circle</i>
 			          <input id="NickName" type="text" class="validate"
-			          th:field="*{nickname}" th:readonly="${readonly}"/> <span th:if="${#fields.hasErrors('nickname')}"
+			          th:field="*{nickname}" th:readonly="${!readonly}"/> <span th:if="${#fields.hasErrors('nickname')}"
 			          th:errors="*{nickname}" th:class="help-block"/>
 			          <label for="NickName" th:text="#{deck.nickname}"></label>
 			        </div>
@@ -154,10 +141,11 @@
 			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('clanname')}? 'has-error'">
 			          <i class="material-icons prefix">turned_in_not</i>
 			          <input id="ClanName" type="text" class="validate"
-			          th:field="*{clanname}" th:readonly="${readonly}"/> <span th:if="${#fields.hasErrors('clanname')}"
+			          th:field="*{clanname}" th:readonly="${!readonly}"/> <span th:if="${#fields.hasErrors('clanname')}"
 			          th:errors="*{clanname}" th:class="help-block"/>
 			          <label for="ClanName" th:text="#{deck.clanname}"></label>
 			        </div>
+			        
 			        <div class="input-field col s12" th:classappend="${#fields.hasErrors('kingtowerlevel')}? 'has-error'">
 			        	<select th:field="*{kingtowerlevel}">
 					      <option th:value="0" th:disabled="true">Choose your option</option>
@@ -194,7 +182,7 @@
 			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
 			          <i class="material-icons prefix">contacts</i>
 			          <input id="Email" type="text" class="validate"
-			          th:field="*{email}" th:readonly="${readonly}"/> <span th:if="${#fields.hasErrors('email')}"
+			          th:field="*{email}" th:readonly="${!readonly}"/> <span th:if="${#fields.hasErrors('email')}"
 			          th:errors="*{email}" th:class="help-block"/>
 			          <label for="Email" th:text="#{deck.email}"><span class="frm_required">*</span></label>
 			        </div>
@@ -234,7 +222,7 @@
     </div>
   </div>
  <!-- EVALUATE FORM FOR ADMIN END -->
- 
+ </main>
   <footer id="aboutus" class="page-footer blue darken-1">
     <div class="container">
       <div class="row">

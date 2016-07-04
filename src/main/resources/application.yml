@@ -15,4 +15,4 @@ spring:
     username: labifrs2016.1@gmail.com
     password: software2016
     port: 587
-    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.enable: true 

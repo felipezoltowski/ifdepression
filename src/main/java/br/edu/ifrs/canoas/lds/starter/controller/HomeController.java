@@ -1,13 +1,23 @@
 package br.edu.ifrs.canoas.lds.starter.controller;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.edu.ifrs.canoas.lds.starter.service.DeckService;
+
 @Controller
 public class HomeController {
+	
+	private DeckService deckService;
+	
+	@Autowired
+	public HomeController(DeckService deckService){
+		this.deckService = deckService;
+	}
 	
 	@RequestMapping("/")
 	public String index(Model model){
@@ -18,6 +28,7 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String home(Model model){
 		model.addAttribute("auth",SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		model.addAttribute("decks", deckService.listApprovedDecks());
 		return "/index";
 	}
 	// Error page

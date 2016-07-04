@@ -14,6 +14,8 @@
   
 </head>
 <body>
+<header></header>
+  <main>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
@@ -64,6 +66,7 @@
         	    <td>
         	    <a href="#" th:href="@{|/deck/view/${deck.id}|}"
 					th:text="|${deck.deckname}|" /></td>
+					
 				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
 					th:text="|${deck.nickname}|" /></td>
 
@@ -86,7 +89,7 @@
       </div>
     </div>
   </div> 
-  
+ </main>
   <footer id="aboutus" class="page-footer blue darken-1">
     <div class="container">
       <div class="row">

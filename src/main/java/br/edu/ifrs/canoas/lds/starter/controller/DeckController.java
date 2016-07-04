@@ -129,6 +129,8 @@ public class DeckController {
 	public String save(@Valid Deck deck, BindingResult bindingResult, Model model, RedirectAttributes redirectAttrs,
 			Locale locale) {
 		if (!bindingResult.hasErrors()) {
+			deck.setNickname(userProfileService.getPrincipal().getUser().getFullName());
+			deck.setEmail(userProfileService.getPrincipal().getUser().getEmail());
 			deck.setStatus(false);
 			deck.setDeletion(null);
 			Deck savedDeck = deckService.save(deck);
@@ -155,12 +157,22 @@ public class DeckController {
 			deckService.delete(deck.getId());
 			
 			redirectAttrs.addFlashAttribute("message5",
-					MessageFormat.format(messageSource.getMessage("deck.evaluation.failed", null, locale), null));	
+					MessageFormat.format(messageSource.getMessage("deck.evaluation.rejected", null, locale), null));	
 			model.addAttribute("readonly", false);
 			
 			return "redirect:/deck/listadmin";
 			
-		} else {
+		} else if(deck.getDeletion().equalsIgnoreCase("save")){
+			deck.setStatus(false);
+			Deck savedDeck = deckService.save(deck);
+			
+			redirectAttrs.addFlashAttribute("message5",
+					MessageFormat.format(messageSource.getMessage("deck.evaluation.saved", null, locale), null));	
+			
+	        model.addAttribute("readonly", true);
+	        
+	        return "redirect:/deck/listadmin";
+		} else {	
 			deck.setStatus(true);
 		}
 		
@@ -170,7 +182,7 @@ public class DeckController {
             model.addAttribute("readonly", true);
 			
 			redirectAttrs.addFlashAttribute("message", 
-					MessageFormat.format(messageSource.getMessage("deck.evaluation.success", null, locale), null));
+					MessageFormat.format(messageSource.getMessage("deck.evaluation.approved", null, locale), null));
 
 	        return "redirect:/deck/view/" + savedDeck.getId() + "?success";
 				
