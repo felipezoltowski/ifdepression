@@ -44,9 +44,14 @@
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Contact Us</h4>
            <div class="row">
+           
+           		<div th:if="${message2}" class="alert alert-success">
+										<p th:text="${message2}" />
+				 </div>
+           		
 			    <form sec:authorize="hasRole('ROLE_USER')" id="contactForm" th:object="${contactus}" th:action="@{/contactus/send}" method="post">
 			      <div class="row">
-			      
+			      	      
 			      <input type="hidden" th:field="*{id}" />
 			      
 			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('fullname')}? 'has-error'">
@@ -85,9 +90,7 @@
     				<i class="material-icons right">send</i>
   				  </button>
 			    </form>
-			       <div th:if="${message2}" class="alert alert-success">
-										<p th:text="${message2}" />
-				  </div>
+			       
  			</div>
         </div>
       </div>

@@ -48,13 +48,18 @@ public class DeckController {
 	
 	/**
 	 * List Method.
+	 * @return all proved decks
 	 */
 	@RequestMapping("/list")
 	public String list(Model model){
 		model.addAttribute("decks", deckService.listApprovedDecks());
 		return "/deck/list";
 	}
-	
+	/**
+	 * ListAdmin Method
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/listadmin")
 	public String listadmin(Model model){
 	    model.addAttribute("decks", deckService.list());
@@ -107,7 +112,7 @@ public class DeckController {
 	public String view(@PathVariable Long id, Model model) {
 		model.addAttribute("deck", deckService.get(id));
 		model.addAttribute("readonly", true);
-		return "/deck/form";
+		return "/deck/view";
 	}
 	
 	/**
@@ -142,7 +147,7 @@ public class DeckController {
 	 */
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/evaluate",  method = RequestMethod.POST)
-	public String evaluate(Deck deck, Model model, RedirectAttributes redirectAttrs,
+	public String evaluate(@Valid Deck deck, Model model, RedirectAttributes redirectAttrs,
 			Locale locale) {
 				
 		if (deck.getDeletion().equalsIgnoreCase("reject")) {
