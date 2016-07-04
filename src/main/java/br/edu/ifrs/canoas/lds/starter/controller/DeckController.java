@@ -148,6 +148,11 @@ public class DeckController {
 		if (deck.getDeletion().equalsIgnoreCase("reject")) {
 			deck.setStatus(false);
 			deckService.delete(deck.getId());
+			
+			redirectAttrs.addFlashAttribute("message5",
+					MessageFormat.format(messageSource.getMessage("deck.evaluation.failed", null, locale), null));	
+			model.addAttribute("readonly", false);
+			
 			return "redirect:/deck/listadmin";
 			
 		} else {
@@ -164,13 +169,8 @@ public class DeckController {
 
 	        return "redirect:/deck/view/" + savedDeck.getId() + "?success";
 				
-			} catch (Exception e) {
-				redirectAttrs.addFlashAttribute("message5",
-						MessageFormat.format(messageSource.getMessage("deck.evaluation.failed", null, locale), null));	
-				model.addAttribute("readonly", false);
-								
-				return "/deck/form";
-			}
-		
+			} catch (Exception e) {								
+			return "/deck/form";
+		}
 	}
 }

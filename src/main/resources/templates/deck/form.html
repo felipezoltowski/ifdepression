@@ -46,7 +46,9 @@
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4 th:if="${readonly}" th:text="#{deck.view}">Submit your deck</h4>
           
-        
+        	<div th:if="${message}" class="alert alert-success">
+										<p th:text="${message}" />
+		  		  </div>
 				  
            <div class="row">
 			    <form sec:authorize="hasRole('ROLE_USER')" id="deckForm" th:object="${deck}" th:action="@{/deck/save}"  method="post">
@@ -69,9 +71,9 @@
 			          th:errors="*{clanname}" th:class="help-block"/>
 			          <label for="ClanName" th:text="#{deck.clanname}"></label>
 			        </div>
-			        <div class="input-field col s12" >
-			        	<select th:field="*{kingtowerlevel}">
-					      <option th:value="0" th:disabled="true">Choose your option</option>
+			        <div class="input-field col s12" th:classappend="${#fields.hasErrors('kingtowerlevel')}? 'has-error'">
+			        	<select th:field="*{kingtowerlevel}" th:disabled="true">
+					      <option th:value="0">Choose your option</option>
 					      <option th:value="1">Level 1</option>
 					      <option th:value="2">Level 2</option>
 					      <option th:value="3">Level 3</option>
@@ -85,9 +87,9 @@
 					    </select>
 					    <label th:text="#{deck.kingtowerlevel}"></label>				    
 					 </div>
-					 <div class="input-field col s12">
-					 <select th:field="*{arena}">
-					      <option th:value="0" th:disabled="true">Choose your option</option>
+					 <div class="input-field col s12" th:classappend="${#fields.hasErrors('arena')}? 'has-error'">
+					 <select th:field="*{arena}" th:disabled="true">
+					      <option th:value="0">Choose your option</option>
 					      <option th:value="1">Arena 1</option>
 					      <option th:value="2">Arena 2</option>
 					      <option th:value="3">Arena 3</option>
@@ -150,9 +152,9 @@
 			          th:errors="*{clanname}" th:class="help-block"/>
 			          <label for="ClanName" th:text="#{deck.clanname}"></label>
 			        </div>
-			        <div class="input-field col s12" th:field="*{kingtowerlevel}" th:readonly="${readonly}">
-			        	<select>
-					      <option th:value="0" th:disabled="0" th:selected="0">Choose your option</option>
+			        <div class="input-field col s12" th:classappend="${#fields.hasErrors('kingtowerlevel')}? 'has-error'">
+			        	<select th:field="*{kingtowerlevel}">
+					      <option th:value="0" th:disabled="true">Choose your option</option>
 					      <option th:value="1">Level 1</option>
 					      <option th:value="2">Level 2</option>
 					      <option th:value="3">Level 3</option>
@@ -162,13 +164,16 @@
 					      <option th:value="7">Level 7</option>
 					      <option th:value="8">Level 8</option>
 					      <option th:value="9">Level 9</option>
-					      <option th:value="10">Level >9</option>
+					      <option th:value="10">Level 10</option>
+					      <option th:value="11">Level 11</option>
+					      <option th:value="12">Level 12</option>
+					      <option th:value="13">Level 13</option>
 					    </select>
 					    <label th:text="#{deck.kingtowerlevel}"></label>				    
 					 </div>
-					 <div class="input-field col s12" th:field="*{arena}" th:readonly="${readonly}">
-					 <select>
-					      <option th:value="0" th:disabled="0" th:selected="0">Choose your option</option>
+					 <div class="input-field col s12" th:classappend="${#fields.hasErrors('arena')}? 'has-error'">
+					 <select th:field="*{arena}" >
+					      <option th:value="0" th:disabled="true">Choose your option</option>
 					      <option th:value="1">Arena 1</option>
 					      <option th:value="2">Arena 2</option>
 					      <option th:value="3">Arena 3</option>
@@ -215,12 +220,7 @@
   				    type="submit" onclick="document.getElementById('deckForm').submit(); return false;">Approve Deck
     				<i class="material-icons right">send</i>
   				  </button>
-  				  
-  				  <div th:if="${message}" class="alert alert-success">
-										<p th:text="${message}" />
-		  		  </div>
-  				  
-  				  
+  				    
   				  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn waves-effect waves-light blue darken-1" 
   				    type="submit" th:href="@{/deck/delete/}+${deck.id}">Delete Deck
     				<i class="material-icons right">send</i>

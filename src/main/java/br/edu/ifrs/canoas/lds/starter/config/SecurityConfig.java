@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/").permitAll()
 			.antMatchers("/deck/list/**").permitAll()
 			.antMatchers("/deck/view/**").permitAll()
+			.antMatchers("/deck/listadmin/**").hasRole("ADMIN").anyRequest().authenticated()
 			.antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated()
 			.and().formLogin()
 				.loginPage("/login").permitAll().and().logout().deleteCookies("remember-me")

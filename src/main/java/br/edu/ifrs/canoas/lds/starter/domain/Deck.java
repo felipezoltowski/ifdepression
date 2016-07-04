@@ -23,10 +23,10 @@ public class Deck {
 	private String clanname;
 	
 	@NotNull
-	private Long kingtowerlevel;
+	private int kingtowerlevel;
 	
 	@NotNull
-	private Long arena;
+	private int arena;
 	
 	@NotEmpty
 	@Email
@@ -67,19 +67,19 @@ public class Deck {
 		this.clanname = clanname;
 	}
 
-	public Long getKingtowerlevel() {
+	public int getKingtowerlevel() {
 		return kingtowerlevel;
 	}
 
-	public void setKingtowerlevel(Long kingtowerlevel) {
+	public void setKingtowerlevel(int kingtowerlevel) {
 		this.kingtowerlevel = kingtowerlevel;
 	}
 
-	public Long getArena() {
+	public int getArena() {
 		return arena;
 	}
 
-	public void setArena(Long arena) {
+	public void setArena(int arena) {
 		this.arena = arena;
 	}
 
