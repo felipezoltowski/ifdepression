@@ -4,7 +4,59 @@
     <title>Error page</title>
   </head>
   <body>
-    <h1 th:text="${errorCode}">500</h1>
-    <p th:text="${errorMessage}">java.lang.NullPointerException</p>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
+      <ul class="right hide-on-med-and-down" sec:authorize="!isAnonymous()">
+        <li><a href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
+        <li><a href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
+        <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
+        <li><a href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
+        <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <!-- CONTENT -->
+						<div class="row">
+							<table class="highlight">
+								<thead>
+									<tr>
+										<td th:text="#{error.text.key}">Key</td>
+										<td th:text="#{error.text.value}">Value</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td th:text="#{error.text.timestamp}">TimeStamp</td>
+										<td th:text="${timestamp}"></td>
+									</tr>
+									<tr>
+										<td th:text="#{error.text.status}">Status</td>
+										<td th:text="${status}"></td>
+									</tr>
+									<tr>
+										<td th:text="#{error.text.message}">Message</td>
+										<td th:text="${message}"></td>
+									</tr>
+									<tr>
+										<td th:text="#{error.text.error}">Error</td>
+										<td th:text="${error}"></td>
+									</tr>
+									<tr>
+										<td th:text="#{error.text.path}">Path</td>
+										<td th:text="${path}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
   </body>
 </html>

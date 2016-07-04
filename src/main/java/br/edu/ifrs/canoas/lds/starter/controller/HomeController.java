@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.edu.ifrs.canoas.lds.starter.domain.Deck;
-
 @Controller
 public class HomeController {
 	

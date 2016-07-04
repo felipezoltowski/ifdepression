@@ -18,67 +18,84 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
       <ul class="right hide-on-med-and-down" sec:authorize="!isAnonymous()">
-        <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
-        <li><a sec:authorize="hasRole('ROLE_USER')" href="/contactus/create"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/deck/listadmin"><i class="material-icons left">dashboard</i>View Decks</a></li>
         <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
         <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
-          <li><a href="#" sec:authentication="principal.fullName"></a></li>
+        <li><a href="#" sec:authentication="principal.fullName"></a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav" sec:authorize="!isAnonymous()">
-      	<li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
-        <li><a sec:authorize="hasRole('ROLE_USER')" href="/contactus/create"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/deck/listadmin"><i class="material-icons left">dashboard</i>View Decks</a></li>
         <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
         <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
-          <li><a href="#" sec:authentication="principal.fullName"></a></li>
+        <li><a href="#" sec:authentication="principal.fullName"></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-
-   <!-- List Deck -->
-  <div id="decklist" class="container" >
+			        
+<!-- Contact us -->
+  <div id="contactus" class="container">
     <div class="section">
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Deck List</h4>
+          <h4>Contact Us</h4>
            <div class="row">
-			    <table class="highlight">
-        <thead>
-          <tr>
-              <th th:text="#{deck.deckname}"></th>
-              <th th:text="#{deck.author}"></th>
-              <th th:text="#{deck.arena}"></th>
-              <th th:text="#{deck.kingtowerlevel}"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          	<tr th:each="deck : ${decks}">
-        	    <td>
-        	    <a href="#" th:href="@{|/deck/view/${deck.id}|}"
-					th:text="|${deck.deckname}|" /></td>
-				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
-					th:text="|${deck.nickname}|" /></td>
-
-				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
-					th:text="|${deck.arena}|" /></td>
-
-				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
-					th:text="|${deck.kingtowerlevel}|" /></td>
-					
-				<td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/deck/edit/}+${deck.id}" th:text="#{crud.action.edit}" class="btn waves-effect waves-light blue darken-1" /> 
-				</td>
-  			</tr>
-        </tbody>
-      </table>
+			    <form sec:authorize="hasRole('ROLE_USER')" id="contactForm" th:object="${contactus}" th:action="@{/contactus/send}" method="post">
+			      <div class="row">
+			      
+			      <input type="hidden" th:field="*{id}" />
+			      
+			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('fullname')}? 'has-error'">
+			          <i class="material-icons prefix">account_circle</i>
+			          <input id="FullName" type="text" class="validate"
+			          th:field="*{fullname}" th:readonly="${readonly}"/> <span th:if="${#fields.hasErrors('fullname')}"
+			          th:errors="*{fullname}" th:class="help-block"/>
+			          <label for="FullName" th:text="#{contactus.fullname}"></label>
+			        </div>
+			        <div class="input-field col s6" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+			          <i class="material-icons prefix">account_circle</i>
+			          <input id="Email" type="tel" class="validate"
+			          th:field="*{email}" th:readonly="${readonly}"/> <span th:if="${#fields.hasErrors('email')}"
+			          th:errors="*{email}" th:class="help-block"/>
+			          <label for="Email" th:text="#{contactus.email}"></label>
+			        </div>
+			        <div class="input-field col s12">
+					 <select th:field="*{type}">
+					      <option th:value="null" th:disabled="true">Choose your option</option>
+					      <option th:value="Doubt"  >Doubt</option>
+					      <option th:value="Suggestion"  >Suggestion</option>
+					      <option th:value="Support"  >Support</option>
+					 </select>
+					    <label th:text="#{contactus.type}"></label>
+					 </div>
+			        <div class="input-field col s12" th:classappend="${#fields.hasErrors('content')}? 'has-error'">
+			          <textarea id="Content" class="materialize-textarea" th:field="*{content}"
+			          th:readonly="${readonly}"></textarea><span th:if="${#fields.hasErrors('content')}"
+			          th:errors="*{content}" th:class="help-block"/>
+			          <label for="Content" th:text="#{contactus.content}"><span class="validate">*</span></label>
+			        </div>
+			      </div>
+			            
+			      <button class="btn waves-effect waves-light blue darken-1" type="submit" id="btSubmitForm"
+									onclick="document.getElementById('contactForm').submit(); return false;">Send Email
+    				<i class="material-icons right">send</i>
+  				  </button>
+			    </form>
+			       <div th:if="${message2}" class="alert alert-success">
+										<p th:text="${message2}" />
+				  </div>
  			</div>
         </div>
       </div>
     </div>
-  </div> 
-  
+  </div>
+<!-- Contact us end -->
+			   
+ 
   <footer id="aboutus" class="page-footer blue darken-1">
     <div class="container">
       <div class="row">

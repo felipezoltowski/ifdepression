@@ -1,13 +1,21 @@
 package br.edu.ifrs.canoas.lds.starter.controller;
 
 import java.text.MessageFormat;
+import java.util.Collection;
 import java.util.Locale;
+import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.ifrs.canoas.lds.starter.domain.Deck;
+import br.edu.ifrs.canoas.lds.starter.domain.Role;
+import br.edu.ifrs.canoas.lds.starter.domain.User;
 import br.edu.ifrs.canoas.lds.starter.service.DeckService;
+import br.edu.ifrs.canoas.lds.starter.service.UserDetailsImpl;
 import br.edu.ifrs.canoas.lds.starter.service.UserProfileService;
 
 @Controller
@@ -40,9 +51,16 @@ public class DeckController {
 	 */
 	@RequestMapping("/list")
 	public String list(Model model){
-		model.addAttribute("decks", deckService.list());
+		model.addAttribute("decks", deckService.listApprovedDecks());
 		return "/deck/list";
 	}
+	
+	@RequestMapping("/listadmin")
+	public String listadmin(Model model){
+	    model.addAttribute("decks", deckService.list());
+        return "/deck/list";
+	}
+	
 	/**
 	 * Delete.
 	 *
@@ -57,7 +75,18 @@ public class DeckController {
 				MessageFormat.format(messageSource.getMessage("deck.deleted", null, locale), deck.getDeckname()));
 
 		return "redirect:/deck/list";
-		
+	}
+	/**
+	 * Edits the.
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/edit/{id}")
+	public String update(@PathVariable Long id, Model model) {
+		model.addAttribute("deck", deckService.get(id));
+		model.addAttribute("readonly", false);
+		return "/deck/form";
 	}
 	/**
 	 * Creates the.
@@ -118,6 +147,9 @@ public class DeckController {
 				
 		if (deck.getDeletion().equalsIgnoreCase("reject")) {
 			deck.setStatus(false);
+			deckService.delete(deck.getId());
+			return "redirect:/deck/listadmin";
+			
 		} else {
 			deck.setStatus(true);
 		}
@@ -136,6 +168,7 @@ public class DeckController {
 				redirectAttrs.addFlashAttribute("message5",
 						MessageFormat.format(messageSource.getMessage("deck.evaluation.failed", null, locale), null));	
 				model.addAttribute("readonly", false);
+								
 				return "/deck/form";
 			}
 		

@@ -18,17 +18,21 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
       <ul class="right hide-on-med-and-down" sec:authorize="!isAnonymous()">
-        <li><a href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
-        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/deck/listadmin"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="/contactus/create"><i class="material-icons left">message</i>Contact Us</a></li>
         <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
         <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
+        <li><a href="#" sec:authentication="principal.fullName"></a></li>
       </ul>
 
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
-        <li><a href="#contactus"><i class="material-icons left">message</i>Contact Us</a></li>
-        <li><a href="#"><i class="material-icons left">live_help</i>About Us</a></li>
+      <ul id="nav-mobile" class="side-nav" sec:authorize="!isAnonymous()">
+        <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a sec:authorize="hasRole('ROLE_ADMIN')" href="/deck/listadmin"><i class="material-icons left">dashboard</i>View Decks</a></li>
+        <li><a href="/contactus/create"><i class="material-icons left">message</i>Contact Us</a></li>
+        <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
         <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
+        <li><a href="#" sec:authentication="principal.fullName"></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -40,7 +44,10 @@
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Submit your deck</h4>
+          <h4 th:if="${readonly}" th:text="#{deck.view}">Submit your deck</h4>
+          
+        
+				  
            <div class="row">
 			    <form sec:authorize="hasRole('ROLE_USER')" id="deckForm" th:object="${deck}" th:action="@{/deck/save}"  method="post">
 			      <div class="row">
@@ -62,9 +69,9 @@
 			          th:errors="*{clanname}" th:class="help-block"/>
 			          <label for="ClanName" th:text="#{deck.clanname}"></label>
 			        </div>
-			        <div class="input-field col s12" th:field="*{kingtowerlevel}">
-			        	<select>
-					      <option th:value="0" th:disabled="0" th:selected="0">Choose your option</option>
+			        <div class="input-field col s12" >
+			        	<select th:field="*{kingtowerlevel}">
+					      <option th:value="0" th:disabled="true">Choose your option</option>
 					      <option th:value="1">Level 1</option>
 					      <option th:value="2">Level 2</option>
 					      <option th:value="3">Level 3</option>
@@ -78,9 +85,9 @@
 					    </select>
 					    <label th:text="#{deck.kingtowerlevel}"></label>				    
 					 </div>
-					 <div class="input-field col s12" th:field="*{arena}">
-					 <select>
-					      <option th:value="0" th:disabled="0" th:selected="0">Choose your option</option>
+					 <div class="input-field col s12">
+					 <select th:field="*{arena}">
+					      <option th:value="0" th:disabled="true">Choose your option</option>
 					      <option th:value="1">Arena 1</option>
 					      <option th:value="2">Arena 2</option>
 					      <option th:value="3">Arena 3</option>
@@ -113,17 +120,9 @@
 			          th:errors="*{guide}" th:class="help-block"/>
 			          <label for="Guide" th:text="#{deck.guide}"><span class="validate">*</span></label>
 			        </div>
-			        
-			        <div sec:authorize="hasRole('ROLE_ADMIN')" class="input-field col s12" th:classappend="${#fields.hasErrors('status')}? 'has-error'">
-						<input type="text" class="validate" id="DeckStatus"
-						th:field="*{status}" th:readonly="${readonly}" /> <span
-						th:if="${#fields.hasErrors('status')}"
-						th:errors="*{status}" th:class="help-block" />
-						<label for="Deck Status" th:text="#{deck.status}"><span class="validate">*</span></label>
-					</div>
-			        		  			      
+			 	        		  			      
 			      <button class="btn waves-effect waves-light blue darken-1" type="submit"
-			      	th:if="#{!readonly}"
+			      	th:if="${!readonly}"
 			      	onclick="document.getElementById('deckForm').submit(); return false;">Send
     				<i class="material-icons right">send</i>
   				  </button>
@@ -204,21 +203,29 @@
 			        </div>
 			        
 			        <div sec:authorize="hasRole('ROLE_ADMIN')" class="input-field col s12" th:classappend="${#fields.hasErrors('status')}? 'has-error'">
-						<input type="text" class="validate" id="DeckStatus"
-						th:field="*{status}" th:readonly="${readonly}" /> <span
-						th:if="${#fields.hasErrors('status')}"
-						th:errors="*{status}" th:class="help-block" />
-						<label for="Deck Status" th:text="#{deck.status}"><span class="validate">*</span></label>
+						<input type="text" class="validate" id="DeckDeletion"
+						th:field="*{deletion}" th:readonly="${readonly}" /> <span
+						th:if="${#fields.hasErrors('deletion')}"
+						th:errors="*{deletion}" th:class="help-block" />
+						<label for="Deck Reject" th:text="#{deck.deletion}"><span class="validate">*</span></label>
 					</div>
+			        
 			        		  			        				  
   				  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn waves-effect waves-light blue darken-1" 
   				    type="submit" onclick="document.getElementById('deckForm').submit(); return false;">Approve Deck
     				<i class="material-icons right">send</i>
   				  </button>
+  				  
+  				  <div th:if="${message}" class="alert alert-success">
+										<p th:text="${message}" />
+		  		  </div>
+  				  
+  				  
   				  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn waves-effect waves-light blue darken-1" 
-  				    type="submit" th:href="@{/deck/delete/}+${deck.id}">Approve Deck
+  				    type="submit" th:href="@{/deck/delete/}+${deck.id}">Delete Deck
     				<i class="material-icons right">send</i>
   				  </button>
+  				  
   				  </div>
 			    </form>
  			</div>

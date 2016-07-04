@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -22,12 +23,13 @@ public class Deck {
 	private String clanname;
 	
 	@NotNull
-	private int kingtowerlevel;
+	private Long kingtowerlevel;
 	
 	@NotNull
-	private int arena;
+	private Long arena;
 	
 	@NotEmpty
+	@Email
 	private String email;
 	
 	@NotEmpty
@@ -65,19 +67,19 @@ public class Deck {
 		this.clanname = clanname;
 	}
 
-	public Integer getKingtowerlevel() {
+	public Long getKingtowerlevel() {
 		return kingtowerlevel;
 	}
 
-	public void setKingtowerlevel(Integer kingtowerlevel) {
+	public void setKingtowerlevel(Long kingtowerlevel) {
 		this.kingtowerlevel = kingtowerlevel;
 	}
 
-	public Integer getArena() {
+	public Long getArena() {
 		return arena;
 	}
 
-	public void setArena(Integer arena) {
+	public void setArena(Long arena) {
 		this.arena = arena;
 	}
 
