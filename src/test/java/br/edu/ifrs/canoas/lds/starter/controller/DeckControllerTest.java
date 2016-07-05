@@ -27,6 +27,7 @@ import br.edu.ifrs.canoas.lds.starter.SpringStarterApplication;
 import br.edu.ifrs.canoas.lds.starter.service.DeckService;
 
 //TODO: Auto-generated Javadoc
+@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpringStarterApplication.class)
 @WebAppConfiguration
@@ -54,58 +55,42 @@ public class DeckControllerTest extends BaseControllerTest{
 			;
 	}
 	@Test
-	public void testToViewSlugArticle1AndCheckAtts() throws Exception {
-		this.mockMvc.perform(post("/article/view/get-program/"))
+	public void testToViewDeckNameDeck1AndCheckAtts() throws Exception {
+		this.mockMvc.perform(post("/deck/view/get-program/"))
 			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("article"))
-			.andExpect(model().attribute("article", hasProperty("title", is("Get With the Program"))))
-			.andExpect(forwardedUrl(PRE_URL+"/article/view"+POS_URL))
+			.andExpect(model().attributeExists("deck"))
+			.andExpect(model().attribute("deck", hasProperty("deckname", is("Hog Beatdown"))))
+			.andExpect(forwardedUrl(PRE_URL+"/deck/view"+POS_URL))
 			;
 	}
 	
 	@Test
 	@WithUserDetails("admin@123.123")
 	@Ignore
-	public void testToCheckArticle3DeleteItAndCheckAgain() throws Exception {
+	public void testToCheckDeck7DeleteItAndCheckAgain() throws Exception {
 		
-		assertThat(articleService.get(7L), is(notNullValue()));
-		assertThat(articleService.get(7L).getTitle(), is("A Face to Remember"));
+		assertThat(deckService.get(7L), is(notNullValue()));
+		assertThat(deckService.get(7L).getDeckname(), is("Skull Musketere"));
 		
-		this.mockMvc.perform(post("/article/delete/7"))
+		this.mockMvc.perform(post("/deck/delete/7"))
 			.andExpect(flash().attributeExists("message"))
 			;
 		
-		assertThat(articleService.get(7L), is(nullValue()));
+		assertThat(deckService.get(7L), is(nullValue()));
 
 	}
 
 	@Test
 	@WithUserDetails("admin@123.123")
-	public void testToDeleteArticle1000ThatDoesNotExists() throws Exception {
+	public void testToDeleteDeck1000ThatDoesNotExists() throws Exception {
 		
-		assertThat(articleService.get(1000L), is(nullValue()));
+		assertThat(deckService.get(1000L), is(nullValue()));
 		
-		this.mockMvc.perform(post("/article/delete/1000"))
+		this.mockMvc.perform(post("/deck/delete/1000"))
 		.andExpect(view().name("redirect:/"))
 		.andExpect(status().is3xxRedirection())
 		;
 
-	}
-
-	/**
-	 * Change: 23/04/2016 - Ricardo - Change test for article id
-	 * @throws Exception
-	 */
-	@Test
-	@WithUserDetails("admin@123.123")
-	@Ignore
-	public void testToDeleteArticle2WithInvalidEmail() throws Exception {
-		assertThat(articleService.get(2L), is(notNullValue()));
-		assertThat(articleService.get(2L).getTitle(), is("Get With the Program"));
-		this.mockMvc.perform(post("/article/delete/2"))
-		.andExpect(view().name("redirect:/"))
-		.andExpect(status().is3xxRedirection())
-		.andExpect(flash().attributeExists("message"));	
 	}
 		
 }

@@ -11,14 +11,8 @@ import br.edu.ifrs.canoas.lds.starter.controller.selenium.ItemControlerSeleniumT
 import br.edu.ifrs.canoas.lds.starter.controller.selenium.PostControlerSeleniumTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ItemControllerTest.class
-	, HomeControllerTest.class
-	, ArticleControllerTest.class
-	, CommentControllerTest.class
-	, JobAdControllerTest.class
-	, ItemControlerSeleniumTest.class
-	, PostControllerTest.class
-	, PostControlerSeleniumTest.class})
+@SuiteClasses({ HomeControllerTest.class
+	, DeckControllerTest.class})
 public class AllTests {
 
 }

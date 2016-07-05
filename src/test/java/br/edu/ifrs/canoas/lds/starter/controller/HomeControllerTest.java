@@ -21,6 +21,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import br.edu.ifrs.canoas.lds.starter.SpringStarterApplication;
 
+@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpringStarterApplication.class)
 @WebAppConfiguration
