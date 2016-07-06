@@ -22,7 +22,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String index(Model model){
 		model.addAttribute("auth",SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		return "redirect:/login";
+		return "/index";
 	}
 	
 	@RequestMapping("/home")

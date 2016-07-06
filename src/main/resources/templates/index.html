@@ -18,7 +18,8 @@
   <main>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
+      <a id="logo-container" href="/login" class="brand-logo modal-trigger" sec:authorize="isAnonymous()">Login</a>
+      <a id="logo-container" href="/home" class="brand-logo modal-trigger" sec:authorize="isAuthenticated()">Home</a>
       <ul class="right hide-on-med-and-down" sec:authorize="!isAnonymous()">
         <li><a href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
         <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
@@ -26,8 +27,8 @@
         <li><a sec:authorize="hasRole('ROLE_USER')" href="/contactus/create"><i class="material-icons left">message</i>Contact Us</a></li>
         <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
         <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
-        <li><a href="#" sec:authentication="principal.fullName"></a></li>
-
+        <li><a href="#" sec:authorize="isAuthenticated()" sec:authentication="principal.fullName"></a></li>
+        
       </ul>
       <ul id="nav-mobile" class="side-nav">
         <li><a href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
@@ -36,7 +37,7 @@
         <li><a sec:authorize="hasRole('ROLE_USER')" href="/contactus/create"><i class="material-icons left">message</i>Contact Us</a></li>
         <li><a href="#aboutus"><i class="material-icons left">live_help</i>About Us</a></li>
         <li><a href="/logout"><i class="material-icons left">lock</i>Logout</a></li>
-          <li><a href="#" sec:authentication="principal.fullName"></a></li>
+          <li><a href="#" sec:authorize="isAuthenticated()" sec:authentication="principal.fullName"></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>

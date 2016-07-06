@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.edu.ifrs.canoas.lds.starter.SpringStarterApplication;
@@ -56,8 +57,8 @@ public class DeckServiceTest {
 	@Test 
 	public void testToCreateAndSaveADeck() {
 		Deck deck = new Deck();
-		deck.setNickname(userProfileService.getPrincipal().getUser().getFullName());
-		deck.setEmail(userProfileService.getPrincipal().getUser().getEmail());
+		deck.setNickname("General User");
+		deck.setEmail("123@123.123");
 		deck.setArena(5);
 		deck.setKingtowerlevel(10);
 		deck.setClanname("In The Light");

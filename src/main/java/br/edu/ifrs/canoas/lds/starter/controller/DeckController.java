@@ -77,7 +77,7 @@ public class DeckController {
 		deckService.delete(id);
 
 		redirectAttrs.addFlashAttribute("message",
-				MessageFormat.format(messageSource.getMessage("deck.deleted", null, locale), deck.getDeckname()));
+				MessageFormat.format(messageSource.getMessage("deck.evaluation.rejected", null, locale), deck.getDeckname()));
 
 		return "redirect:/deck/list";
 	}

@@ -43,14 +43,13 @@ public class DeckControllerTest extends BaseControllerTest{
 	}
 
 	@Test
-	@WithUserDetails("123@123.123")
 	public void testToCreateNewDeckAndCheckAtts() throws Exception {
 		this.mockMvc.perform(post("/deck/create"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeExists("deck"))
-			.andExpect(model().attribute("decks", hasProperty("deckname", isEmptyOrNullString())))
+			.andExpect(model().attribute("deck", hasProperty("deckname", isEmptyOrNullString())))
 			.andExpect(model().attribute("readonly",is(false)))
-			.andExpect(forwardedUrl(PRE_URL+"/deck/new"+POS_URL))
+			.andExpect(forwardedUrl(PRE_URL+"/deck/form"+POS_URL))
 			;
 	}
 	@Test
@@ -79,16 +78,13 @@ public class DeckControllerTest extends BaseControllerTest{
 	}
 
 	@Test
-	@WithUserDetails("admin@123.123")
-	public void testToDeleteDeck1000ThatDoesNotExists() throws Exception {
+	public void testToViewDeck100ThatDoesNotExists() throws Exception {
+		assertThat(deckService.get(100L), is(nullValue()));
 		
-		assertThat(deckService.get(1000L), is(nullValue()));
-		
-		this.mockMvc.perform(post("/deck/delete/1000"))
-		.andExpect(view().name("redirect:/"))
-		.andExpect(status().is3xxRedirection())
-		;
-
+		this.mockMvc.perform(post("/deck/view/100"))
+		.andExpect(view().name("/deck/view"))
+		.andExpect(status().is2xxSuccessful())
+		;		
 	}
 		
 }
