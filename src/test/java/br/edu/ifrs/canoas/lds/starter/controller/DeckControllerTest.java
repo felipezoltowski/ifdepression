@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ import br.edu.ifrs.canoas.lds.starter.SpringStarterApplication;
 import br.edu.ifrs.canoas.lds.starter.service.DeckService;
 
 //TODO: Auto-generated Javadoc
-@SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(SpringStarterApplication.class)
 @WebAppConfiguration
@@ -45,8 +43,9 @@ public class DeckControllerTest extends BaseControllerTest{
 	}
 
 	@Test
+	@WithUserDetails("123@123.123")
 	public void testToCreateNewDeckAndCheckAtts() throws Exception {
-		this.mockMvc.perform(post("/deck/new"))
+		this.mockMvc.perform(post("/deck/create"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeExists("deck"))
 			.andExpect(model().attribute("decks", hasProperty("deckname", isEmptyOrNullString())))
@@ -56,7 +55,7 @@ public class DeckControllerTest extends BaseControllerTest{
 	}
 	@Test
 	public void testToViewDeckNameDeck1AndCheckAtts() throws Exception {
-		this.mockMvc.perform(post("/deck/view/get-program/"))
+		this.mockMvc.perform(post("/deck/view/1"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeExists("deck"))
 			.andExpect(model().attribute("deck", hasProperty("deckname", is("Hog Beatdown"))))
@@ -66,7 +65,6 @@ public class DeckControllerTest extends BaseControllerTest{
 	
 	@Test
 	@WithUserDetails("admin@123.123")
-	@Ignore
 	public void testToCheckDeck7DeleteItAndCheckAgain() throws Exception {
 		
 		assertThat(deckService.get(7L), is(notNullValue()));

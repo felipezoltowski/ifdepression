@@ -23,27 +23,22 @@ public class ContactService {
 	}
 	
 	/**
-	 * Gets the.
-	 *
-	 * @param id
-	 *            the id
-	 * @return the article
-	 */
-	public Contact get(Long id) {
-		return contactRepository.findOne(id);
-	}
-	
-	/**
 	 * Save.
 	 *
-	 * @param courses
-	 *            the courses
-	 * @return the course
+	 * @param contact
+	 *            the contact
+	 * @return the contact
 	 */
 	public Contact save(Contact contact) {
 		return contactRepository.save(contact);
 	}
-
+	/**
+	 * Delete.
+	 *
+	 * @param contact
+	 *            the contact
+	 * @return the contact
+	 */
 	public void delete(Long id) {
 		contactRepository.delete(id);	
 	}
