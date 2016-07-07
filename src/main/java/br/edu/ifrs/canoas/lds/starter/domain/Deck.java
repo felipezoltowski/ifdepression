@@ -15,8 +15,7 @@ public class Deck {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@NotEmpty
+
 	private String nickname;
 	
 	@NotEmpty
@@ -28,7 +27,6 @@ public class Deck {
 	@NotNull
 	private int arena;
 	
-	@NotEmpty
 	@Email
 	private String email;
 	
