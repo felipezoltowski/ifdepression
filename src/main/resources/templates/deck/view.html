@@ -18,7 +18,7 @@
   <main>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="/home" class="brand-logo modal-trigger">Home</a>
+      <a id="logo-container" href="/" class="brand-logo modal-trigger">Home</a>
       <ul class="right hide-on-med-and-down" sec:authorize="!isAnonymous()">
         <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/create"><i class="material-icons left">input</i>Send Your Deck</a></li>
         <li><a sec:authorize="hasRole('ROLE_USER')" href="/deck/list"><i class="material-icons left">dashboard</i>View Decks</a></li>
