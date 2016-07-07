@@ -3,6 +3,8 @@ package br.edu.ifrs.canoas.lds.starter.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.canoas.lds.starter.domain.Deck;
@@ -70,6 +72,10 @@ public class DeckService {
 	 */
 	public Iterable<Deck> listApprovedDecks() {
 		return deckRepository.findByStatus(true);
+	}
+	
+	public List <Deck> list3(){
+		return deckRepository.findFirst3ByOrderByDecknameAsc();
 	}
 
 }

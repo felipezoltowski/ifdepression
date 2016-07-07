@@ -50,14 +50,14 @@
            <div th:if="${message5}" class="alert alert-success">
 										<p th:text="${message5}" />
 		   </div>
-			    <table class="highlight">
+	<table id="DeckTable" class="highlight">
         <thead>
           <tr>
               <th th:text="#{deck.deckname}"></th>
               <th th:text="#{deck.author}"></th>
               <th th:text="#{deck.arena}"></th>
               <th th:text="#{deck.kingtowerlevel}"></th>
-              <th th:text="#{deck.status}"></th>
+              <th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{deck.status}"></th>
           </tr>
         </thead>
 
@@ -76,7 +76,7 @@
 				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
 					th:text="|${deck.kingtowerlevel}|" /></td>
 					
-				<td><a href="#" th:href="@{|/deck/view/${deck.id}|}"
+				<td><a sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{|/deck/view/${deck.id}|}"
 					th:text="|${deck.status}|" /></td>
 					
 				<td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/deck/edit/}+${deck.id}" th:text="#{crud.action.edit}" class="btn waves-effect waves-light blue darken-1" /> 

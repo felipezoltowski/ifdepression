@@ -22,13 +22,14 @@ public class HomeController {
 	@RequestMapping("/")
 	public String index(Model model){
 		model.addAttribute("auth",SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		model.addAttribute("decks", deckService.list3());
 		return "/index";
 	}
 	
 	@RequestMapping("/home")
 	public String home(Model model){
 		model.addAttribute("auth",SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-		model.addAttribute("decks", deckService.listApprovedDecks());
+		model.addAttribute("decks", deckService.list3());
 		return "/index";
 	}
 	// Error page

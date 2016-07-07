@@ -144,7 +144,7 @@
 						<label for="Deck Reject" th:text="#{deck.confirm}"><span class="validate">*</span></label>
 					</div>
 			        
-			      <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/deck/edit/}+${deck.id}" th:text="#{crud.action.edit}" class="btn waves-effect waves-light blue darken-1" />
+			      <a sec:authorize="hasRole('ROLE_ADMIN')" id="editbutton" th:href="@{/deck/edit/}+${deck.id}" th:text="#{crud.action.edit}" class="btn waves-effect waves-light blue darken-1" />
 			      
   				  <button sec:authorize="hasRole('ROLE_ADMIN')" class="btn waves-effect waves-light blue darken-1" 
   				    type="submit" onclick="document.getElementById('deckForm').submit(); return false;">Evaluate Deck
