@@ -1,7 +1,7 @@
 package br.edu.ifrs.canoas.lds.starter.controller.selenium;
 
-import static org.fluentlenium.core.filter.FilterConstructor.withText;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.withText;
 
 import java.util.concurrent.TimeUnit;
 
